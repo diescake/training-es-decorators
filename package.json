@@ -1,0 +1,8 @@
+{
+  "name": "training-es-decorators",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:diescake/training-es-decorators.git",
+  "author": "diescake <daisuke.kondo@access-company.com>",
+  "license": "MIT"
+}
