@@ -1,8 +1,16 @@
 {
   "name": "training-es-decorators",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "simple.ts",
+  "scripts": {
+    "start": "ts-node simple.ts"
+  },
   "repository": "git@github.com:diescake/training-es-decorators.git",
   "author": "diescake <daisuke.kondo@access-company.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "ts-node": "^6.1.0",
+    "typescript": "^2.9.1"
+  }
 }

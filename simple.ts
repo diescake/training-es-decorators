@@ -1,25 +1,49 @@
-const decoFunc = (a: () => number, b: () => number): any => {
-  return (Class: any): any => {
-    return (c: number) => {
-      console.log(`result: ${a() * b() * c}`);
-      return new Class(c);
+(() => {
+  const decoratorForClass = (a: () => number, b: () => number): any => {
+    console.log('decoratorForClass');
+
+    return (Class: any): any => {
+      return (c: number) => {
+        return new Class(a() * b() * c);
+      };
     };
   };
-};
 
-const getNumberA = () => {
-  return 3;
-};
+  const decoratorForMethod = (num: number): any => {
+    console.log('decoratorForMethod');
 
-const getNumberB = () => {
-  return 7;
-};
+    return function decorator(t, n, descriptor) {
+      const original = descriptor.value;
 
-@decoFunc(getNumberA, getNumberB)
-class MyClass {
-  constructor(c: number) {}
-}
+      descriptor.value = function(...args) {
+        args[0] *= num;
+        return original.apply(this, args);
+      }
+      return descriptor;
+    };
+  };
 
-const myclass = new MyClass(10);
-console.log(myclass);
+  const createValueA = () => {
+    return 3;
+  };
+
+  const createValueB = () => {
+    return 7;
+  };
+
+  @decoratorForClass(createValueA, createValueB)
+  class Sample {
+    constructor(value: number) {
+      console.log(`value is ${value}`);
+    }
+
+    @decoratorForMethod(4)
+    setValue(value: number): void {
+      console.log(`value is ${value}`);
+    }
+  }
+
+  const sample = new Sample(10);
+  sample.setValue(8);
+})();
 
